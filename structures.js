@@ -64,3 +64,8 @@ JSA.Queue = function(val) {
 		this.Enqueue(val);
 	}
 }
+
+/* a stack implemented with a linked list */
+JSA.Stack = function(val) {
+
+}
