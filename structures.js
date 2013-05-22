@@ -67,5 +67,35 @@ JSA.Queue = function(val) {
 
 /* a stack implemented with a linked list */
 JSA.Stack = function(val) {
-
+	
+	this.Push = function(val) {
+		var node = new JSA.Node(val);
+		if (_count > 0) {
+			node.SetNext(_head);
+		} 
+		_head = node;
+		_count++;
+	}
+	
+	this.Pop = function() {
+		if (_count == 0) {
+			throw "cannot Pop an empty stack";
+		}
+		var val = _head.GetValue();
+		_head = _head.GetNext();
+		if(--_count == 0) {
+			_head = null;
+		}
+		return val;
+	}
+	
+	this.GetCount = function() {
+		return _count;
+	}
+	
+	if (val) {
+		this.Push(val);
+	}
+	var _head = null;
+	var _count = 0;
 }

@@ -68,3 +68,33 @@ QUnit.test( "Should be able to empty and fill the queue without any issues.", fu
 	assert.equal( q.Dequeue(), "c");
 	assert.equal( q.GetCount(), 0);
 });
+
+module("JSA.Stack Tests");
+QUnit.test( "Stack.Push should increment the count by 1.", function(assert) {
+	var stack = new JSA.Stack();
+	stack.Push("val");
+	assert.equal( stack.GetCount(), 1);
+});
+QUnit.test( "Stack.Pop should decrement the count by 1.", function(assert) {
+	var stack = new JSA.Stack();
+	stack.Push("val");
+	assert.equal( stack.GetCount(), 1, "increased by 1");
+	stack.Pop();
+	assert.equal( stack.GetCount(), 0, "decreased by 1");
+});
+QUnit.test( "A Stack should be LIFO.", function(assert) {
+	var stack = new JSA.Stack();
+	stack.Push("1");
+	stack.Push("2");
+	stack.Push("3");
+	assert.equal( stack.Pop(), "3");
+	assert.equal( stack.Pop(), "2");
+	assert.equal( stack.Pop(), "1");
+});
+QUnit.test( "Cannot Pop an empty Stack.", function(assert) {
+	var stack = new JSA.Stack();
+	assert.throws(
+		function() { stack.Pop(); },
+		"error thrown"
+	);
+});
