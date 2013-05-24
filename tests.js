@@ -98,3 +98,9 @@ QUnit.test( "Cannot Pop an empty Stack.", function(assert) {
 		"error thrown"
 	);
 });
+
+module("Algorithms");
+QUnit.test( "printBinaryTree should output the correct format.", function(assert) {
+	var root = new JSA.BinaryTree(1, new JSA.BinaryTree(2, 4, 5), new JSA.BinaryTree(3, 6, 7));
+	assert.equal( printBinaryTree(root), "1 \r\n2 3 \r\n4 5 6 7 \r\n");
+});

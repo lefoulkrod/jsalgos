@@ -8,9 +8,7 @@ JSA.Node = function(val) {
 	};
 	
 	this.SetNext = function(val) {
-		if (!(val instanceof JSA.Node))
-			val = new JSA.Node(val);
-		_next = val;
+		_next = val instanceof JSA.Node ? val : new JSA.Node(val);
 	};
 	
 	this.GetValue = function() {
@@ -42,7 +40,7 @@ JSA.Queue = function(val) {
 	};
 	
 	this.Dequeue = function() {
-		if (_count == 0) { throw "The queueu is empty."; }
+		if (_count == 0) { throw "Cannot dequeue an empty queue."; }
 		val = _head.GetValue();
 		_head = _head.GetNext();
 		if (--_count == 0){
@@ -98,4 +96,28 @@ JSA.Stack = function(val) {
 	}
 	var _head = null;
 	var _count = 0;
+}
+
+/* a binary tree */
+JSA.BinaryTree = function(val, left, right) {
+	
+	this.GetLeft = function() { return _left; }
+	this.GetRight = function() { return _right; }
+	this.GetValue = function() { return _val; }
+	/* set the left child, creating a new BinaryTree instance if the argument is not already an instance. */
+	this.SetLeft = function(left) {
+		_left = left instanceof JSA.BinaryTree ? left : left && new JSA.BinaryTree(left);
+	}
+	/* set the right child, creating a new BinaryTree instance if the argument is not already an instance. */
+	this.SetRight = function(right) {
+		_right = right instanceof JSA.BinaryTree ? right : right && new JSA.BinaryTree(right);
+	}
+	
+	var _val = null; 
+	var _left = null; 
+	var _right = null;
+	
+	_val = val;
+	this.SetLeft(left);
+	this.SetRight(right);
 }
