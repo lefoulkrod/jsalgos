@@ -110,3 +110,9 @@ QUnit.test( "hasAllUniqueCharacters should return true for the string 'abcdefg'"
 QUnit.test( "hasAllUniqueCharacters should return false for the string 'abcdefa'", function(assert) {
 	assert.equal( hasAllUniqueCharacters("abcdefa"), false);
 });
+QUnit.test( "isAPermutation should return false for the strings 'abcde' and 'abgde'", function(assert) {
+	assert.equal( isAPermutation("abcde", "abgde"), false);
+});
+QUnit.test( "isAPermutation should return true for the strings 'abcde' and 'decba'", function(assert) {
+	assert.equal( isAPermutation("abcde", "decba"), true);
+});
