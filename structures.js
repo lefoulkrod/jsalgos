@@ -29,34 +29,34 @@ JSA.Queue = function(val) {
 	
 	this.Enqueue = function(val) {
 		var node = new JSA.Node(val);
-		if (_count == 0) {
+		if (_size == 0) {
 			_head = node;
 		} 
 		else {
 			_tail.SetNext(node);
 		}
 		_tail = node;
-		_count++;
+		_size++;
 	};
 	
 	this.Dequeue = function() {
-		if (_count == 0) { throw "Cannot dequeue an empty queue."; }
+		if (_size == 0) { throw "Cannot dequeue an empty queue."; }
 		val = _head.GetValue();
 		_head = _head.GetNext();
-		if (--_count == 0){
+		if (--_size == 0){
 			_tail = null;
 			_head = null;
 		}
 		return val;
 	};
 	
-	this.GetCount = function() {
-		return _count;
+	this.GetSize = function() {
+		return _size;
 	};
 	
 	var _head = null;
 	var _tail = null;
-	var _count = 0;
+	var _size = 0;
 	
 	if (val) { 
 		this.Enqueue(val);
