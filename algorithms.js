@@ -18,17 +18,34 @@ function printBinaryTree(root) {
 	
 	if (!root) return ""; // minimal error checking, just return an empty string if the root is not valid.
 	
-	var nodes = [root];
+	var nodes = new JSA.Queue(root);
 	var output = '';
-	while (nodes.length > 0) {
-		var children = [];
-		for (var i = 0; i < nodes.length; i++) {
-			output += nodes[i].GetValue() + ' ';
-			nodes[i].GetLeft() && children.push(nodes[i].GetLeft());
-			nodes[i].GetRight() && children.push(nodes[i].GetRight());
+	while (nodes.GetSize() > 0) {
+		var nodesOnCurrentLevel = nodes.GetSize();
+		for (var i = 0; i < nodesOnCurrentLevel; i++) {
+			var node = nodes.Dequeue();
+			output += node.GetValue() + ' ';
+			if ( node.GetLeft() ) { nodes.Enqueue(node.GetLeft()) };
+			if ( node.GetRight() ) { nodes.Enqueue(node.GetRight()) };
 		}
 		output += "\r\n";
-		nodes = children;
 	}
 	return output;
 }
+
+/* Determine if a string has only unique characters. */
+function hasAllUniqueCharacters(word) {
+
+	if ( !word ) { throw "word must be a string" };
+	 
+	word = new String(word);
+	var hash = {};
+	for (var i = 0; i < word.length; i++) {
+		if ( hash.hasOwnProperty( word[i] ) ) {
+			return false;
+		}
+		else { hash[ word[i] ] = null; }
+	}
+	return true;
+}
+

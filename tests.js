@@ -28,13 +28,13 @@ module("JSA.Queue Tests");
 QUnit.test( "Queue.Enqueue should increase the count by 1.", function(assert) {
 	var q = new JSA.Queue();
 	q.Enqueue("newval");
-	assert.equal( q.GetCount(), 1);
+	assert.equal( q.GetSize(), 1);
 });
 QUnit.test( "Queue.Dequeue should decrease the count by 1.", function(assert) {
 	var q = new JSA.Queue();
 	q.Enqueue("newval");
 	q.Dequeue();
-	assert.equal( q.GetCount(), 0);
+	assert.equal( q.GetSize(), 0);
 });
 QUnit.test( "Queue.Dequeue should be FIFO.", function(assert) {
 	var q = new JSA.Queue();
@@ -59,14 +59,14 @@ QUnit.test( "Should be able to empty and fill the queue without any issues.", fu
 	assert.equal( q.Dequeue(), "1");
 	assert.equal( q.Dequeue(), "2");
 	assert.equal( q.Dequeue(), "3");
-	assert.equal( q.GetCount(), 0);
+	assert.equal( q.GetSize(), 0);
 	q.Enqueue("a");
 	q.Enqueue("b");
 	q.Enqueue("c");
 	assert.equal( q.Dequeue(), "a");
 	assert.equal( q.Dequeue(), "b");
 	assert.equal( q.Dequeue(), "c");
-	assert.equal( q.GetCount(), 0);
+	assert.equal( q.GetSize(), 0);
 });
 
 module("JSA.Stack Tests");
@@ -103,4 +103,10 @@ module("Algorithms");
 QUnit.test( "printBinaryTree should output the correct format.", function(assert) {
 	var root = new JSA.BinaryTree(1, new JSA.BinaryTree(2, 4, 5), new JSA.BinaryTree(3, 6, 7));
 	assert.equal( printBinaryTree(root), "1 \r\n2 3 \r\n4 5 6 7 \r\n");
+});
+QUnit.test( "hasAllUniqueCharacters should return true for the string 'abcdefg'", function(assert) {
+	assert.equal( hasAllUniqueCharacters("abcdefg"), true);
+});
+QUnit.test( "hasAllUniqueCharacters should return false for the string 'abcdefa'", function(assert) {
+	assert.equal( hasAllUniqueCharacters("abcdefa"), false);
 });
