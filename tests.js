@@ -116,3 +116,24 @@ QUnit.test( "isAPermutation should return false for the strings 'abcde' and 'abg
 QUnit.test( "isAPermutation should return true for the strings 'abcde' and 'decba'", function(assert) {
 	assert.equal( isAPermutation("abcde", "decba"), true);
 });
+QUnit.test( "removeDuplicates should return the head when there is only one node in the list", function(assert) {
+	var head = new JSA.Node("1");
+	var newHead = removeDuplicates(head);
+	assert.equal( newHead.GetValue(), "1");
+	assert.equal( newHead.GetNext(), null);
+});
+QUnit.test( "removeDuplicates should return a new list without duplicates", function(assert) {
+	var head = new JSA.Node("1");
+	var node2 = new JSA.Node("2");
+	var node3 = new JSA.Node("3");
+	var node4 = new JSA.Node("4");
+	var node5 = new JSA.Node("4");
+	var node6 = new JSA.Node("4");
+	head.SetNext(node2); node2.SetNext(node3); node3.SetNext(node4); node4.SetNext(node5); node5.SetNext(node6);
+	var newHead = removeDuplicates(head);
+	assert.equal( newHead.GetValue(), "1");
+	assert.equal( newHead.GetNext().GetValue(), "2");
+	assert.equal( newHead.GetNext().GetNext().GetValue(), "3");
+	assert.equal( newHead.GetNext().GetNext().GetNext().GetValue(), "4");
+	assert.equal( newHead.GetNext().GetNext().GetNext().GetNext(), null);
+});

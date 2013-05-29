@@ -79,3 +79,27 @@ function isAPermutation(word1, word2) {
 	
 	return true;
 }
+
+/* Remove duplicates from an unsorted linked list. */
+function removeDuplicates(head) {
+	
+	if (!head) { throw "invalid argument, head must be a node instance"; }
+	if (!head.GetNext()) { return head; } // if head is the only node, there are no duplicates
+	
+	var hash = {};
+	hash[ head.GetValue() ] = null; // seed the hash with the head's value
+	var previous = head;
+	var current = head.GetNext();
+	while (current) {
+		if ( hash.hasOwnProperty( current.GetValue() ) ) {
+			// found a duplicate, remove it
+			previous.SetNext( current.GetNext() || null);
+		} else {
+			// this one is not a duplicate, add it to the hash and advance the previous pointer
+			hash[ current.GetValue() ] = null;
+			previous = current;
+		}
+		current = current.GetNext();
+	}
+	return head;
+}

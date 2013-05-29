@@ -8,6 +8,10 @@ JSA.Node = function(val) {
 	};
 	
 	this.SetNext = function(val) {
+		if (val == null) {
+			_next = null;
+			return;
+		}
 		_next = val instanceof JSA.Node ? val : new JSA.Node(val);
 	};
 	
@@ -18,7 +22,7 @@ JSA.Node = function(val) {
 	this.SetValue = function(val) {
 		_val = val;
 	};
-	
+		
 	var _next = null;
 	var _val = null;
 	this.SetValue(val);
